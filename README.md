@@ -1,7 +1,7 @@
 # R0314-MEAN---Project-1
 Full Stack - Project 1
 
-A simple Guestbook page done with Node.js and Express for a school project.
+A simple Guestbook site done with Node.js and Express for a school project.
 
 Requirements:
 
