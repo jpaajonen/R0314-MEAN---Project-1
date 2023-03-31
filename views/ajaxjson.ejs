@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Project 1 - Guestbook</title>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
     <link
       rel="stylesheet"
@@ -82,71 +82,42 @@
         <a href="guestbook" class="w3-bar-item w3-button w3-padding-large"
           >Read Guestbook</a
         >
-        <a
-          href="ajaxmessage"
-          class="w3-bar-item w3-button w3-padding-large"
+        <a href="ajaxmessage" class="w3-bar-item w3-button w3-padding-large"
           >Ajax Guestbook</a
         >
       </div>
     </div>
 
-</div>
-<br />
-<br />
-<!-- <div>
-  <h1>AJAX Guestbook</h1>
-  <form method="POST" action="/ajaxmessage" class="w3-padding-large">
-    <label for="username">Username:</label><br />
-    <input type="text" name="username" id="username" required /><br />
-    <label for="country">Country:</label><br />
-    <input type="text" name="country" id="country" required /><br />
-    <label for="message">Message:</label><br />
-    <textarea
-      name="message"
-      id="message"
-      rows="3"
-      cols="150"
-      maxlength="300"
-      wrap="hard"
-      required></textarea>
     <br />
     <br />
-    <button type="button" id="submit" class="w3-button w3-white w3-border w3-border-red w3-hover-red">Submit</button>
-  </form>
-</div> -->
 
-    <div id="results">
-      <br>
-
-      <div class="w3-responsive">
-        <table class="w3-table-all" style="max-width: 100%;">
-          <tr class="w3-red">
-            <th>User</th>
-            <th>Country</th>
-            <th>Message</th>
-          </tr>
-          <% JSONdata.forEach(function(entry) { %>
-            <tr>
-              <td class="userName"><%= entry.Username %> </td>
-              <td class="country"><%= entry.Country %> </td>
-              <td class="message"><%= entry.Message %> </td>
-            </tr>
+    <div class="w3-responsive">
+      <table class="w3-table-all" style="max-width: 100%">
+        <tr class="w3-red">
+          <th>User</th>
+          <th>Country</th>
+          <th>Message</th>
+        </tr>
+        <% JSONdata.forEach(function(entry) { %>
+        <tr>
+          <td class="userName"><%= entry.Username %></td>
+          <td class="country"><%= entry.Country %></td>
+          <td class="message"><%= entry.Message %></td>
+        </tr>
         <% }) %>
-        </table>
-      </div>
+      </table>
+    </div>
 
-  </div>
-  </body>
-  <script>
-    // Used to toggle the menu on small screens when clicking on the menu button
-    function myFunction() {
-      var x = document.getElementById("navDemo");
-      if (x.className.indexOf("w3-show") == -1) {
-        x.className += " w3-show";
-      } else {
-        x.className = x.className.replace(" w3-show", "");
+    <script>
+      // Used to toggle the menu on small screens when clicking on the menu button
+      function myFunction() {
+        var x = document.getElementById("navDemo");
+        if (x.className.indexOf("w3-show") == -1) {
+          x.className += " w3-show";
+        } else {
+          x.className = x.className.replace(" w3-show", "");
+        }
       }
-    }
-  </script>
-</body>
+    </script>
+  </body>
 </html>

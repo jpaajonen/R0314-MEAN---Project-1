@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Project 1 - Guestbook</title>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
     <link
       rel="stylesheet"
@@ -36,6 +36,9 @@
       .fa-anchor,
       .fa-coffee {
         font-size: 200px;
+      }
+      .pageTitle {
+        padding-left: 20px;
       }
     </style>
   </head>
@@ -92,7 +95,7 @@
     <div>
       <br>
       <br>
-      <h1>Guestbook</h1>
+      <h1 class="pageTitle">Guestbook</h1>
 
       <div class="w3-responsive">
         <table class="w3-table-all" style="max-width: 100%;">
@@ -101,6 +104,7 @@
             <th>Country</th>
             <th>Message</th>
           </tr>
+          <!--a row and table data is created for each JSON object -->
           <% JSONdata.forEach(function(entry) { %>
             <tr>
               <td class="userName"><%= entry.Username %> </td>

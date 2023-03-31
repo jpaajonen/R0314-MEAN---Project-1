@@ -36,6 +36,9 @@
       .fa-coffee {
         font-size: 200px;
       }
+      .pageTitle {
+        padding-left: 20px;
+      }
     </style>
   </head>
   <body>
@@ -91,63 +94,34 @@
     <br />
     <br />
     <div>
-      <h1>AJAX Guestbook</h1>
-      <form method="POST" action="/ajaxmessage" class="w3-padding-large">
+      <h1 class="pageTitle">Guestbook</h1>
+      <!--A form is created-->
+      <form
+        id="guestInput"
+        method="post"
+        action="/newmessage"
+        class="w3-padding-large"
+      >
         <label for="username">Username:</label><br />
-        <input type="text" name="username" id="username" required /><br />
+        <input type="text" name="username" required /><br />
         <label for="country">Country:</label><br />
-        <input type="text" name="country" id="country" required /><br />
+        <input type="text" name="country" required /><br />
         <label for="message">Message:</label><br />
+        <!--the message part gets a textarea-->
         <textarea
           name="message"
-          id="message"
           rows="3"
           cols="150"
           maxlength="300"
           wrap="hard"
-          required></textarea>
-        <br />
-        <br />
-        <button type="button" id="submit" class="w3-button w3-white w3-border w3-border-red w3-hover-red">Submit</button>
+          required
+        ></textarea
+        ><br /><br />
+        <input type="submit" value="Submit" />
       </form>
     </div>
-
-    <div id="results"></div>
-
-    <script>
-        window.onload = event => {
-
-            var button = document.getElementById("submit");
-
-            button.addEventListener("click", () => {
-                var username = document.getElementById("username").value;
-                var country = document.getElementById("country").value;
-                var message = document.getElementById("message").value;
-                console.log(username, country, message);
-
-                var xmlhttp = new XMLHttpRequest();
-                xmlhttp.onreadystatechange = function() {
-                    if (this.readyState == 4 && this.status == 200 ) {
-                        document.getElementById("results").innerHTML = this.responseText;
-                        console.log(this.responseText);
-                       
-                        }
-                    };
-                xmlhttp.open("POST", "/ajaxmessage", true);
-                xmlhttp.setRequestHeader(
-                    "Content-type",
-                //    "application/json"
-                    "application/x-www-form-urlencoded"
-                    
-                );
-               // let new_data = { Username: username, Country: country, Message: message};
-               // xmlhttp.send(JSON.stringify(new_data));
-
-                xmlhttp.send("username=" + username + "&country=" + country + "&message=" + message);
-            });
-        };
-        
-
+  </body>
+  <script>
     // Used to toggle the menu on small screens when clicking on the menu button
     function myFunction() {
       var x = document.getElementById("navDemo");

@@ -1,3 +1,4 @@
+//loading all the dependencies
 const express = require("express");
 const app = express();
 const fs = require("fs");
@@ -11,93 +12,71 @@ var bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+//defining the different routes
+//root loads index.html
 app.get("/", function (req, res) {
-  res.sendFile(__dirname + "/index.html");
+  res.sendFile(__dirname + "/public/index.html");
 });
-
+//ajaxmessage loads ajaxmessage.html
 app.get("/ajaxmessage", function (req, res) {
-  res.sendFile(__dirname + "/ajaxmessage.html");
+  res.sendFile(__dirname + "/public/ajaxmessage.html");
 });
-
+//manipulating JSON, first the current data is passed to a variable
 app.post("/ajaxmessage", function (req, res) {
-  console.log(req.body);
-
   const data = require("./JSONguestinfo.json");
-
+//new data is pushed to the JSON variable
   data.push({
     Username: req.body.username,
     Country: req.body.country,
     Message: req.body.message,
   });
-
+//JSON objects are stringified 
   const jsonStr = JSON.stringify(data);
-
+//the stringified data is written to the original file
   fs.writeFile("JSONguestinfo.json", jsonStr, (err) => {
     if (err) throw err;
   });
-
+//the updated JSON data is passed to a variable for ejs use
   var newdata = require("./JSONguestinfo.json");
+//the variable is ejs'd to ajaxjson.ejs  
   res.render("ajaxjson", {JSONdata: newdata} );
 });
 
-//serve a form to the user
+//newmessage serves the newmessage.html form
 app.get("/newmessage", function (req, res) {
-  res.sendFile(__dirname + "/newmessage.html");
+  res.sendFile(__dirname + "/public/newmessage.html");
 });
 //route for form sending the POST data
 app.post("/newmessage", function (req, res) {
-  console.log(req.body);
-  //load the existing data from a file
+//  console.log(req.body);
+  
   var data = require("./JSONguestinfo.json");
-  //Create a new JSON object and add it to the existing data variable (push to end of array, unshift to start of array)
+
   data.push({
     Username: req.body.username,
     Country: req.body.country,
     Message: req.body.message,
   });
 
-  //convert the JSON object to a string format
   var jsonStr = JSON.stringify(data);
 
-  //write data to a file
   fs.writeFile("JSONguestinfo.json", jsonStr, (err) => {
-    if (err) throw err;
-   // console.log("It's saved!");
-   
+    if (err) throw err;  
   });
-
-  //res.send("Thank you for your entry!");
+//redirect the user to the guestbook after submitting entry
   res.redirect("/guestbook");
 });
 //route for viewing the json data
 app.get("/guestbook", function (req, res) {
   var data = require("./JSONguestinfo.json");
-  /*  var results = '<table id="contents" border="1"> ';
-
-  for (var i = 0; i < data.length; i++) {
-    results +=
-      "<tr>" +
-      "<td class='user'>" +
-      data[i].Username +
-      "</td>" +
-      "<td class='country'>" +
-      data[i].Country +
-      "</td>" +
-      "<td class='message'>" +
-      data[i].Message +
-      "</td>" +
-      "</tr>";
-  }  */
+//ejs is used to style the JSON data
   res.render("json", { JSONdata: data });
-  //res.send(results);
 });
-
+//error message for routes that aren't defined
 app.get("*", function (req, res) {
   res.send("Cant find the requested page", 404);
 });
 
-//app.use(express.static('./public/demosite'));
-
-app.listen(8080, function () {
-  console.log("Example app listening to port", port);
+app.listen(port, function () {
+  console.log("App listening to port", port);
 });
